@@ -15,7 +15,7 @@
 
 将`GFS`数据软链接到`data/gfs4`。
 
-```{dropdown} 服务器`GFS`数据分布
+```{dropdown} "服务器`GFS`数据分布"
 :open: 
 :icon: code
 :color: info
