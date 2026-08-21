@@ -28,12 +28,13 @@
 
 ## 可视化
 
-开启X11图形界面转发后在`WPS`目录下执行：
-```bash
-ncl util/plotgrids_new.ncl
-```
-
-获取远端项目后参考其中的`README.md`运行绘制：
-```bash
-git clone https://github.com/XiaAnren/WRF-Domain.git
-```
+将`namelist.wps`放入`domain/namelists`目录下，按需修改`run.py`里的相关参数并运行脚本（`name`与`domain/namelists`里的文件名保持一致），结果将会保存在`domain/images`文件夹下：
+|名称|含义|
+|:--:|:--:|
+|`name`|`namelists`与`images`下的文件名|
+|`domain`|右侧子图的外层嵌套域编号|
+|`maxdom`|最大嵌套域数量|
+|`wspace`|子图水平间距|
+|`xyintervals`|经纬度刻度间隔，按最外层域编号进行索引|
+|`width_ratios`|子图的宽度比例|
+|`dpi`|保存图片的分辨率|
