@@ -13,7 +13,7 @@ author = "XuRan"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_nb", "sphinx_design", "sphinx_copybutton"]
+extensions = ["myst_nb", "sphinx_design", "sphinx_copybutton", "sphinxemoji.sphinxemoji"]
 nb_execution_mode = "off"
 myst_enable_extensions = ["dollarmath", "amsmath", "colon_fence", "alert"]
 

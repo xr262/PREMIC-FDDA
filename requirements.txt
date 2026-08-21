@@ -1,4 +1,5 @@
 sphinx
+sphinxemoji
 sphinx-design
 sphinx_copybutton
 myst_nb
