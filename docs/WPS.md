@@ -21,7 +21,7 @@
 
 ## 运行流程
 
-生成`geo_em.d0?.nc`：
+在`datest/WPS`下，运行如下命令，生成`geo_em.d0?.nc`：
 ```bash
 ./geogrid.exe
 ```
