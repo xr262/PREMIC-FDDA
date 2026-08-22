@@ -15,8 +15,7 @@ author = "XuRan"
 
 extensions = ["myst_nb", "sphinx_design", "sphinx_copybutton"]
 nb_execution_mode = "off"
-myst_enable_extensions = ["dollarmath", "amsmath", "colon_fence", "alert", "emoji"]
-myst_emoji = "unicode"
+myst_enable_extensions = ["dollarmath", "amsmath", "colon_fence", "alert"]
 
 language = "en"
 
