@@ -1,8 +1,11 @@
 # FDDA
 
-## 雷达资料处理（只能在GPU节点运行）
+## 雷达资料处理
 
 > 工作路径：`/data3/XuRan/datest/SWAN`
+
+> [!IMPORTANT]
+> SWAN数据目前只在GPU节点可用。
 
 在命令行执行：
 ```bash
