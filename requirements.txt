@@ -1,5 +1,6 @@
 sphinx
 sphinx-design
 sphinx_copybutton
+mdit-py-emoji
 myst_nb
 furo
