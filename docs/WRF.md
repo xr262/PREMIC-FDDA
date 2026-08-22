@@ -78,6 +78,7 @@ cp $WPS/geo_em.d0?.nc wps/org
 
 > [!NOTE]
 > `node13`、`node14`各有32个核
+> 
 > `node15`、`node16`各有36个核
 
 提交任务（提交前记得用`nps`检查各个节点使用情况）：
