@@ -65,7 +65,8 @@ cp $WPS/geo_em.d0?.nc wps/org
 ## 运行流程
 
 ### 运行前准备
-用`nps`检查各个节点使用情况
+
+用`nps`检查各个节点使用情况，
 根据实际需要的`node`编号修改`GMODJOBS/$GMODJOBS/member-nodes`。
 
 根据案例时间修改`GMODJOBS/$GMODJOBS/flexinput.pl`：
@@ -87,6 +88,7 @@ cp $WPS/geo_em.d0?.nc wps/org
 > `node15`、`node16`各有36个核
 
 ### 提交任务
+
 在`GMODJOBS/$GMODJOBS`目录下提交任务：
 ```bash
 ./start_rtfddaflex_gmod.pl $GMODJOBS $YYYYMMDDHH
@@ -94,11 +96,13 @@ cp $WPS/geo_em.d0?.nc wps/org
 其中`$GMODJOBS`是实验名称，`$YYYYMMDDHH`是spin up结束时间。
 
 ### 如何查看进程
+
 任意目录下，
 ```bash
 top -u XuRan
 ```
 如果看到 ./wrf.mpich,说明 WRF 主程序已经启动，退出`q`（英文状态下）。
+
 再进入`datest/cycles/$GMODJOBS/GFS_WCTRL`目录下，
 ```bash
 tail -f restrts/rsl.error.0000
