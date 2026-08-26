@@ -51,19 +51,24 @@ cp $WPS/geo_em.d0?.nc wps/org
 
 ### 配置文件
 
-根据`namelist.wps`修改`namelists/WRF.nl.template.WCTRL`：
+根据`namelist.wps`修改`GMODJOBS/$GMODJOBS/namelists/WRF.nl.template.WCTRL`：
 |参数名称|实际含义|
 |:--:|:--:|
 |`e_we`/`e_sn`|每个域东西向/南北向的网格数|
 |`dx`/`dy`|最外层网格东西向/南北向网格距（单位：米）|
 |`i_parent_start`/`j_parent_start`|嵌套域左下角在父域中的`(i,j)`坐标，最外层网格为`1`|
 |`parent_grid_ratio`|父域相对于嵌套域相的网格距比值，推荐`3`或`5`，最外层网格为`1`|
+>[!TIP]
+>该文件下包括`time_control`、`domains`、`physics`（参数化方案）、`fdda`、`dynamics`等
+
 
 ## 运行流程
 
-根据实际需要的`node`编号修改`member-nodes`。
+### 运行前准备
+用`nps`检查各个节点使用情况
+根据实际需要的`node`编号修改`GMODJOBS/$GMODJOBS/member-nodes`。
 
-根据案例时间修改`flexinput.pl`：
+根据案例时间修改`GMODJOBS/$GMODJOBS/flexinput.pl`：
 |参数名称|实际含义|
 |:--:|:--:|
 |`NUM_DOMS`|嵌套域数量|
@@ -81,8 +86,21 @@ cp $WPS/geo_em.d0?.nc wps/org
 > 
 > `node15`、`node16`各有36个核
 
-提交任务（提交前记得用`nps`检查各个节点使用情况）：
+### 提交任务
+在`GMODJOBS/$GMODJOBS`目录下提交任务：
 ```bash
 ./start_rtfddaflex_gmod.pl $GMODJOBS $YYYYMMDDHH
 ```
 其中`$GMODJOBS`是实验名称，`$YYYYMMDDHH`是spin up结束时间。
+
+### 如何查看进程
+任意目录下，
+```bash
+top -u XuRan
+```
+如果看到 ./wrf.mpich,说明 WRF 主程序已经启动，退出`q`（英文状态下）。
+再进入`datest/cycles/$GMODJOBS/GFS_WCTRL`目录下，
+```bash
+tail -f restrts/rsl.error.0000
+```
+即可查看运行到哪个时间。退出`ctrl+C`
