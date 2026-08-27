@@ -22,7 +22,7 @@
 ./run.sh
 ```
 
-结果会保存在`wrffdda/$GMODJOBS/$TIME`下，将生成的文件拼接到一起：
+结果会保存在`wrffdda/$GMODJOBS/$TIME`下，在该目录下，执行如下命令，将生成的文件拼接到一起：
 ```bash
 ncrcat wrffdda_d02_* wrffdda_d02
 ```
@@ -31,21 +31,35 @@ ncrcat wrffdda_d02_* wrffdda_d02
 
 > 工作路径：`/data3/XuRan/datest/cycles/$GMODJOBS/GFS_WCTRL/$TIME/`
 
-配置`WRF_P`文件夹作为同化模板：
+进入`/WRF_P`目录，配置`WRF_P`文件夹作为同化模板：
 ```bash
 WRF_P
+```
+把刚处理好的雷达资料同化数据wrffdda链接过来：
+```bash
 ln -s /data3/XuRan/datest/SWAN/wrffdda/$GMODJOBS/$TIME/wrffdda_d02
 ```
 
-复制`WRF_P`：
+返回上一级`/$TIME`目录，复制`WRF_P`同化模版并命名成SWAN：
 ```bash
 cp -r WRF_P SWAN
 ```
 
-按需修改`namelist.input`里的`nproc_x`和`nproc_y`、编辑`hosts`文件，并提交任务：
+进入新复制命名的同化模版`SWAN`目录下，运行同化试验 
+用`nps`查看可运行的节点，按需修改`/SWAN/namelist.input`里的`nproc_x`和`nproc_y`，
+双核运行：编辑`hosts`文件，并提交任务
 ```bash
 for node in 13 14 15 16; do echo "node$node:32" >> hosts; done
-nohup mpirun -np 32 ./wrf.mpich &> /dev/null &
-nohup mpirun -np 36 ./wrf.mpich &> /dev/null &
 nohup mpirun -machinefile hosts ./wrf.mpich &> /dev/null &
+```
+>[!NOTE]
+>13&14双核，32+32=64，所以修改x、y别是8、8；15&16双核，36+36=72，所以修改x、y别是8、9。
+
+单核运行：
+```bash
+nohup mpirun -np 32 ./wrf.mpich &> /dev/null &
+```
+或者
+```bash
+nohup mpirun -np 36 ./wrf.mpich &> /dev/null &
 ```

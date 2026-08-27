@@ -64,7 +64,6 @@ cp $WPS/geo_em.d0?.nc wps/org
 
 ## 运行流程
 
-### 运行前准备
 
 用`nps`检查各个节点使用情况，
 根据实际需要的`node`编号修改`GMODJOBS/$GMODJOBS/member-nodes`。
@@ -94,6 +93,7 @@ cp $WPS/geo_em.d0?.nc wps/org
 ./start_rtfddaflex_gmod.pl $GMODJOBS $YYYYMMDDHH
 ```
 其中`$GMODJOBS`是实验名称，`$YYYYMMDDHH`是spin up结束时间。
+生成的结果在`cycles/$GMODJOBS/GFS_WCTRL/$TIME/`目录下
 
 ### 如何查看进程
 
