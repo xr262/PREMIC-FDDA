@@ -46,7 +46,8 @@ cp -r WRF_P SWAN
 ```
 
 进入新复制命名的同化模版`SWAN`目录下，运行同化试验 
-用`nps`查看可运行的节点，按需修改`/SWAN/namelist.input`里的`nproc_x`和`nproc_y`，
+用`nps`查看可运行的节点，按需修改`/SWAN/namelist.input`里的`nproc_x`和`nproc_y`
+
 双核运行：编辑`hosts`文件，并提交任务
 ```bash
 for node in 13 14 15 16; do echo "node$node:32" >> hosts; done
@@ -63,3 +64,12 @@ nohup mpirun -np 32 ./wrf.mpich &> /dev/null &
 ```bash
 nohup mpirun -np 36 ./wrf.mpich &> /dev/null &
 ```
+
+## Python后处理可视化
+### 组合反射率图
+找到`/data3/code/assimilation/case.py`文件，修改前置参数，即可运行
+>[!TIP]
+>`mode = "SWAN"`中的SWAN是复制命名后的配置WRF_P同化模版，名变此处变
+### 定量评估图
+`/data3/code/assimilation/metrics.py`文件用于定义FSS和TS如何计算
+`/data3/code/assimilation/sequence.py`文件用于画图
