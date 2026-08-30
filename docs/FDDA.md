@@ -26,6 +26,11 @@
 ```bash
 ncrcat wrffdda_d02_* wrffdda_d02
 ```
+可以执行如下命令查看拼接好的wrffdda文件中物理量随高度的变化：
+```bash
+ncview wrffdda_d02
+```
+
 
 ## 运行同化实验
 

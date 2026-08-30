@@ -31,6 +31,10 @@
 ### 驱动数据
 
 将`GFS`数据软链接到`data/gfs4`。
+进入`/datest/data/`目录下，执行如下命令可看到GFS的数据分布
+```bash
+Path
+```
 
 ```{dropdown} 服务器数据分布
 :open: 
@@ -39,6 +43,27 @@
 :animate: fade-in
 - 历史数据：`/data1/premdev/datainput_arc/gfs4/`
 - 实时数据：`/public/home/premdev/data/datainput/gfs4/`
+```
+
+链接历史数据：先查看历史数据包括哪些年月，如有所需的，再`ll`查看所需年月包含的日期。
+
+数据以压缩包`.tar`或`.tar.gz`格式出现。
+
+解压`.tar`格式（假设所需年月为2025年8月）：
+```bash
+tar -xvf 202508.tar
+```
+
+解压`.tar.gz`格式：
+```bash
+tar -xvzf 202508.tar.gz
+```
+
+链接实时数据：用`ll`查看实时数据目录下包含的年月日的文件，以`2026082900_fh.0081_tl.press_gr.0p5deg.grib2`形式结尾。
+
+执行如下命令将其链接到目标目录下：
+```bash
+ln -s 2026082900* /data3/XuRan/datest/data/gfs4/
 ```
 
 ### 静态数据
