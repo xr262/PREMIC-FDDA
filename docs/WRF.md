@@ -2,29 +2,7 @@
 
 ## 文件结构
 
-|名称|含义|是否需要修改|
-|:--|:--|:--:|
-|`fddahome`|运行时的必要组件（一般不改）|❌|
-|$\quad$|$\quad$|$\quad$|
-|`data`|输入的`GFS`驱动场和可选的观测资料||
-|`data/gfs4`|输入的`GFS`驱动场数据|✅|
-|`data/cma_decoded`|输入的观测资料（可选）|❌|
-|$\quad$|$\quad$|$\quad$|
-|`GMODJOBS`|运行配置和启动脚本||
-|`GMODJOBS/$GMODJOBS`|案例配置和启动主文件夹||
-|`GMODJOBS/$GMODJOBS/executables`|可执行文件|❌|
-|`GMODJOBS/$GMODJOBS/namelists`|`WRF`运行时配置（修改`WRF.nl.template.WCTRL`）|✅|
-|`GMODJOBS/$GMODJOBS/wrfrun`|`WRF`运行时必要组件|❌|
-|`GMODJOBS/$GMODJOBS/wps`|`WPS`静态数据（将生成的`geo_em.d0?.nc`放到`6pass_glc`和`org`）|✅|
-|`GMODJOBS/$GMODJOBS/start_rtfddaflex_gmod.pl`<br>`GMODJOBS/$GMODJOBS/rtfddaflex.pl`|启动脚本和工作脚本|❌|
-|`GMODJOBS/$GMODJOBS/member-nodes`|配置工作节点|✅|
-|`GMODJOBS/$GMODJOBS/flexinput.pl`|配置实验时间和使用核数|✅|
-|$\quad$|$\quad$|$\quad$|
-|`cycles`|运行结果|❌|
-|`cycles/$GMODJOBS/zout`|运行日志||
-|`cycles/$GMODJOBS/GFS_WCTRL/$TIME`|案例运行结果||
-|`cycles/$GMODJOBS/GFS_WCTRL/$TIME/WRF_F`|spin up工作文件夹||
-|`cycles/$GMODJOBS/GFS_WCTRL/$TIME/WRF_P`|预报工作文件夹||
+![](Folder.png)
 
 ## 运行前准备
 

@@ -141,6 +141,12 @@ ln -s /data3/XiaAnRen/vscode vscode
 ```
 软链接，并且把这个链接命名为 vscode。
 
+###
+专门找失效软链接
+```bash
+find 路径 -xtype l -ls
+```
+
 
 ## 六、运行程序 / 后台任务
 
