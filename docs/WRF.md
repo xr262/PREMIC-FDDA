@@ -27,9 +27,16 @@ Path
 
 数据以压缩包`.tar`或`.tar.gz`格式出现。
 
-解压`.tar`格式（假设所需年月为2025年8月）：
+先建立一个新文件夹：
 ```bash
-tar -xvf 202508.tar
+mkdir -p /data3/XuRan/datest/data/gfs_history/2024021500
+```
+
+再把压缩包解压到新文件夹里：
+
+解压`.tar`格式（假设所需年月为2024年2月15日）：
+```bash
+tar -xvf /data1/premdev/datainput_arc/gfs4/202402/gfs4.2024021500.tar -C /data3/XuRan/datest/data/gfs_history/2024021500
 ```
 
 解压`.tar.gz`格式：
@@ -41,7 +48,7 @@ tar -xvzf 202508.tar.gz
 
 执行如下命令将其链接到目标目录下：
 ```bash
-ln -s 2026082900* /data3/XuRan/datest/data/gfs4/
+ln -s /data3/XuRan/datest/data/gfs_history/2024021500/2024021500* /data3/XuRan/datest/data/gfs4/
 ```
 
 ### 静态数据
