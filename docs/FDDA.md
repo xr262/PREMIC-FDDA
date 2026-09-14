@@ -45,7 +45,7 @@ WRF_P
 ln -s /data3/XuRan/datest/SWAN/wrffdda/$GMODJOBS/$TIME/wrffdda_d02
 ```
 
-如果同时还需要同化观测数据，则先将所有单个时次的OBS文件软链接过来：
+如果同时还需要同化观测数据，则先将所需的同化时段内所有单个时次的OBS文件依次软链接过来：
 ```bash
 ln -s /data3/XuRan/code/vscode/pytorch/xtest/inference/observation/YYYYMMDD/YYYY-MM-DD_HH:MM:SS
 ```
@@ -55,9 +55,15 @@ ln -s /data3/XuRan/code/vscode/pytorch/xtest/inference/observation/YYYYMMDD/YYYY
 cat YYYY-MM-??_??:??:?? > OBS_DOMAIN
 ```
 
+
 根据需要进行同化的嵌套层级分别进行软链接：
 ```bash
 for domain in 1 2; do ln -s OBS_DOMAIN OBS_DOMAIN${domain}01; done
+```
+
+返回上一级`/$TIME`目录，复制`WRF_P`同化模版并命名成OBS：
+```bash
+cp -r WRF_P OBS
 ```
 
 编辑`namelist.input`（确保`obs_nudge_opt`是开启状态；`max_obs`能够覆盖所有可用观测点数量；按需决定`grid_fdda`的状态）：
@@ -67,12 +73,13 @@ obs_nudge_opt = 1,1,
 max_obs       = 200000,200000,
 ```
 
+同化雷达资料则
 返回上一级`/$TIME`目录，复制`WRF_P`同化模版并命名成SWAN：
 ```bash
 cp -r WRF_P SWAN
 ```
 
-进入新复制命名的同化模版`SWAN`目录下，运行同化试验 
+进入新复制命名的同化模版`SWAN`或`OBS`目录下，运行同化试验 
 用`nps`查看可运行的节点，按需修改`/SWAN/namelist.input`里的`nproc_x`和`nproc_y`
 
 双核运行：编辑`hosts`文件，并提交任务
@@ -90,6 +97,18 @@ nohup mpirun -np 32 ./wrf.mpich &> /dev/null &
 或者
 ```bash
 nohup mpirun -np 36 ./wrf.mpich &> /dev/null &
+```
+
+查看进程：
+
+任意目录下：
+```bash
+top -u XuRan
+```
+如果看到 ./wrf.mpich,说明 WRF 主程序已经启动，退出q（英文状态下）。
+进入下一级`/OBS/restrts`目录下
+```bash
+tail -f rsl.error.0000
 ```
 
 ## Python后处理可视化
