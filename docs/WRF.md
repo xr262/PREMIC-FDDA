@@ -23,7 +23,7 @@ Path
 - 实时数据：`/public/home/premdev/data/datainput/gfs4/`
 ```
 
-链接历史数据：先查看历史数据包括哪些年月，如有所需的，再`ll`查看所需年月包含的日期。
+1.链接历史数据：先查看历史数据包括哪些年月，如有所需的，再`ll`查看所需年月包含的日期。
 
 数据以压缩包`.tar`或`.tar.gz`格式出现。
 
@@ -44,9 +44,10 @@ tar -xvf /data1/premdev/datainput_arc/gfs4/202402/gfs4.2024021500.tar -C /data3/
 tar -xvzf 202508.tar.gz
 ```
 
-链接实时数据：用`ll`查看实时数据目录下包含的年月日的文件，以`2026082900_fh.0081_tl.press_gr.0p5deg.grib2`形式结尾。
+2.链接实时数据：用`ll`查看实时数据目录下包含的年月日的文件，以`2026082900_fh.0081_tl.press_gr.0p5deg.grib2`形式结尾。
 
-执行如下命令将其链接到目标目录下：
+
+3.执行如下命令将其链接到目标目录下：
 ```bash
 ln -s /data3/XuRan/datest/data/gfs_history/2024021500/2024021500* /data3/XuRan/datest/data/gfs4/
 ```
@@ -113,7 +114,7 @@ top -u XuRan
 ```
 如果看到 ./wrf.mpich,说明 WRF 主程序已经启动，退出`q`（英文状态下）。
 
-再进入`datest/cycles/$GMODJOBS/GFS_WCTRL`目录下，
+再进入`datest/cycles/$GMODJOBS/GFS_WCTRL/WRF-P`目录下，
 ```bash
 tail -f restrts/rsl.error.0000
 ```

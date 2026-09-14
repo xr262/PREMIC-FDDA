@@ -45,6 +45,28 @@ WRF_P
 ln -s /data3/XuRan/datest/SWAN/wrffdda/$GMODJOBS/$TIME/wrffdda_d02
 ```
 
+如果同时还需要同化观测数据，则先将所有单个时次的OBS文件软链接过来：
+```bash
+ln -s /data3/XuRan/code/vscode/pytorch/xtest/inference/observation/YYYYMMDD/YYYY-MM-DD_HH:MM:SS
+```
+
+拼接到一起：
+```bash
+cat YYYY-MM-??_??:??:?? > OBS_DOMAIN
+```
+
+根据需要进行同化的嵌套层级分别进行软链接：
+```bash
+for domain in 1 2; do ln -s OBS_DOMAIN OBS_DOMAIN${domain}01; done
+```
+
+编辑`namelist.input`（确保`obs_nudge_opt`是开启状态；`max_obs`能够覆盖所有可用观测点数量；按需决定`grid_fdda`的状态）：
+```
+grid_fdda     = 0,0,
+obs_nudge_opt = 1,1,
+max_obs       = 200000,200000,
+```
+
 返回上一级`/$TIME`目录，复制`WRF_P`同化模版并命名成SWAN：
 ```bash
 cp -r WRF_P SWAN
