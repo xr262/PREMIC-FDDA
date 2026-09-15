@@ -45,7 +45,10 @@ WRF_P
 ln -s /data3/XuRan/datest/SWAN/wrffdda/$GMODJOBS/$TIME/wrffdda_d02
 ```
 
-如果同时还需要同化观测数据，则先将所需的同化时段内所有单个时次的OBS文件依次软链接过来：
+如果同时还需要同化观测数据，则先把站点OBS数据处理成伪观测格点数据，
+运行`/public/home/XuRan/data3/code/vscode/pytorch/xtest/inference/main.py`,该`main.py`文件完成3件事：①跑模型 ②输出伪观测格点数据 ③可视化温度场、湿度场和风场
+
+再将所需的同化时段内所有单个时次的OBS文件依次软链接过来：
 ```bash
 ln -s /data3/XuRan/code/vscode/pytorch/xtest/inference/observation/YYYYMMDD/YYYY-MM-DD_HH:MM:SS
 ```
@@ -53,6 +56,10 @@ ln -s /data3/XuRan/code/vscode/pytorch/xtest/inference/observation/YYYYMMDD/YYYY
 拼接到一起：
 ```bash
 cat YYYY-MM-??_??:??:?? > OBS_DOMAIN
+```
+例如：
+```bash
+cat 2023-08-29_21:00:00 2023-08-29_22:00:00 2023-08-29_23:00:00 2023-08-30_00:00:00 > OBS_DOMAIN
 ```
 
 
@@ -106,9 +113,10 @@ nohup mpirun -np 36 ./wrf.mpich &> /dev/null &
 top -u XuRan
 ```
 如果看到 ./wrf.mpich,说明 WRF 主程序已经启动，退出q（英文状态下）。
-进入下一级`/OBS/restrts`目录下
+
+在`cycles/$GMODJOBS/GFS_WCTRL/$TIME/OBS`目录下
 ```bash
-tail -f rsl.error.0000
+tail -f restrts/rsl.error.0000
 ```
 
 ## Python后处理可视化
